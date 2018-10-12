@@ -15,6 +15,8 @@ namespace StsExample
 {
     public class Startup
     {
+        public static OAuthAuthorizationServerOptions OAuthAuthorizationServerOptions { get; private set; }
+
         public void Configuration(IAppBuilder app)
         {
             app.UseCors(CorsOptions.AllowAll);
@@ -30,7 +32,7 @@ namespace StsExample
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-            var options = new OAuthAuthorizationServerOptions
+            OAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
@@ -39,7 +41,7 @@ namespace StsExample
                 RefreshTokenProvider = new SimpleRefreshTokenProvider()
             };
 
-            app.UseOAuthAuthorizationServer(options);
+            app.UseOAuthAuthorizationServer(OAuthAuthorizationServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ApplicationCookie);
 
@@ -48,7 +50,7 @@ namespace StsExample
                 ClientId = "493794776144150528",
                 ClientSecret = "k_b5S2Id6lHQdfPnEg2QPmwSh7CE3kCy",
                 Provider = new DiscordAuthorizationProvider(),
-                CallbackPath = new PathString("/api/external/discord/")
+                CallbackPath = new PathString("/api/external/discord/"),
             };
 
             app.UseDiscordAuthentication(discordOptions);
