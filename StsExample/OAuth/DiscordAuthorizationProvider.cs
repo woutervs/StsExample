@@ -21,23 +21,6 @@ namespace StsExample.OAuth
         public override async Task ReturnEndpoint(DiscordReturnEndpointContext context)
         {
             var clientId = "angular";
-            //var refreshTokenId = Guid.NewGuid().ToString("N");
-
-            //using (var authenticationRepository = new AuthenticationRepository())
-            //{
-            //    var refreshTokenLifeTime = TimeSpan.FromDays(1).TotalMinutes;
-            //    var token = new RefreshToken
-            //    {
-            //        Id = refreshTokenId.Hash(),
-            //        ClientId = clientId,
-            //        Subject = context.Identity.FindFirst(ClaimTypes.Email).Value,
-            //        IssuedUtc = DateTime.UtcNow,
-            //        ExpiresUtc = DateTime.UtcNow.AddMinutes(refreshTokenLifeTime)
-            //    };
-            //    //var accessToken = Startup.OAuthAuthorizationServerOptions.RefreshTokenFormat.Protect(ticket);
-            //    //token.ProtectedTicket = accessToken;
-            //    //var result = await authenticationRepository.AddRefreshTokenAsync(token);
-            //}
 
             var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
             {
