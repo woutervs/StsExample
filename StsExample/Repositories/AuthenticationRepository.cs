@@ -40,6 +40,12 @@ namespace StsExample.Repositories
             return user;
         }
 
+        public async Task<IdentityUser> FindUserAsync(string userName)
+        {
+            var user = await userManager.FindByNameAsync(userName);
+            return user;
+        }
+
         public async Task<Client> FindClientAsync(string clientId)
         {
             return await context.Clients.FindAsync(clientId);

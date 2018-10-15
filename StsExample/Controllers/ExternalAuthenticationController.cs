@@ -8,9 +8,9 @@ namespace StsExample.Controllers
     {
         [Route("discord")]
         [HttpGet]
-        public IHttpActionResult Authenticate([FromUri] string returnUrl)
+        public IHttpActionResult Authenticate([FromUri] string returnUrl, [FromUri] string client)
         {
-            return new ChallengeResult(Request, "Discord", returnUrl);
+            return new ChallengeResult(Request, "Discord", returnUrl, client);
         }
 
         //[Route("callback")]
