@@ -90,6 +90,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -120,6 +121,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Helpers\EmailNotVerified\EmailNotVerified.html">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +133,9 @@
     <Compile Include="Controllers\ExternalAuthenticationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Helpers\EmailNotVerified\EmailNotVerifiedModel.cs" />
+    <Compile Include="Helpers\TransformXsltHelper.cs" />
+    <Compile Include="Helpers\TypedMemoryCache.cs" />
     <Compile Include="Migrations\201809201528592_InitialCreate.cs" />
     <Compile Include="Migrations\201809201528592_InitialCreate.Designer.cs">
       <DependentUpon>201809201528592_InitialCreate.cs</DependentUpon>

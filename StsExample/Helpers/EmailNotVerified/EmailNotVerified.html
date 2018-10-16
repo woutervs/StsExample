@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" indent="yes"/>
+    <xsl:template match="/EmailNotVerifiedModel">
+      <xsl:text disable-output-escaping='yes'>&lt;!doctype html&gt;</xsl:text>
+        <html lang="en">
+        <head>
+            <title>Oops! An error occured.</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+                  crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+                  crossorigin="anonymous" />
+        </head>
+        <body>
+            <div class="card w-50 mx-auto mt-5">
+                <i class="fab fa-10x mx-auto {FontAwesomeIconName}"></i>
+                <div class="card-body">
+                    <h5 class="card-title">Unable to connect.</h5>
+                    <p class="card-text">Your account on <span><xsl:value-of select="Provider"></xsl:value-of></span> does not seem verified, so we can't connect to STSExample</p>
+                    <a href="{ReturnUrl}" class="btn btn-primary">Take me back!</a>
+                </div>
+            </div>
+        </body>
+    </html>
+</xsl:template>
+</xsl:stylesheet>

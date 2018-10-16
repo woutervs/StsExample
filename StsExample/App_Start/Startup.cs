@@ -6,7 +6,6 @@ using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Owin.Security.Providers.Discord;
-using Owin.Security.Providers.Discord.Provider;
 using StsExample;
 using StsExample.OAuth;
 
