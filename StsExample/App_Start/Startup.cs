@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
@@ -31,28 +30,35 @@ namespace StsExample
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-            OAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions
+            //In combination with an extra login through the bearer authentication you can also set a cookie, or using the default by supplying a login path which will owin signin.
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationMode = AuthenticationMode.Active,
+            //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
+            //});
+
+            // You only need this when you want external providers to set a cookie and to be able to validate that way.
+            //            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseOAuthAuthorizationServer(OAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
                 Provider = new SimpleAuthorizationServerProvider(),
                 RefreshTokenProvider = new SimpleRefreshTokenProvider()
-            };
+            });
 
-            app.UseOAuthAuthorizationServer(OAuthAuthorizationServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ApplicationCookie);
 
-            var discordOptions = new DiscordAuthenticationOptions
+
+            app.UseDiscordAuthentication(new DiscordAuthenticationOptions
             {
                 ClientId = "493794776144150528",
                 ClientSecret = "k_b5S2Id6lHQdfPnEg2QPmwSh7CE3kCy",
                 Provider = new DiscordAuthorizationProvider(),
                 CallbackPath = new PathString("/api/external/discord/"),
-            };
-
-            app.UseDiscordAuthentication(discordOptions);
+                SignInAsAuthenticationType = "None" //We don't want the default login behavior where a cookie is set.
+            });
         }
     }
 }

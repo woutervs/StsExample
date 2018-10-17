@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web.Cors;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using StsExample.Models.Database;
@@ -19,7 +18,7 @@ namespace StsExample.OAuth
 
             if (!context.TryGetBasicCredentials(out _, out var clientSecret))
             {
-                context.TryGetFormCredentials(out var clientId, out clientSecret);
+                context.TryGetFormCredentials(out _, out clientSecret);
             }
 
             if (context.ClientId == null)
@@ -114,6 +113,11 @@ namespace StsExample.OAuth
 
             var ticket = new AuthenticationTicket(identity, authenticationProperties);
 
+
+            //var identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
+            //identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+            //context.OwinContext.Authentication.SignIn(identity);
             context.Validated(ticket);
         }
 
@@ -146,6 +150,11 @@ namespace StsExample.OAuth
             var newIdentity = new ClaimsIdentity(context.Ticket.Identity); //though here you can change existing claims with updated claims.
             var newTicket = new AuthenticationTicket(newIdentity, context.Ticket.Properties);
             context.Validated(newTicket);
+            
+            //var identity = new ClaimsIdentity(DefaultAuthenticationTypes.ApplicationCookie);
+            //identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            //identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+            //context.OwinContext.Authentication.SignIn(identity);
             return Task.CompletedTask;
 
         }

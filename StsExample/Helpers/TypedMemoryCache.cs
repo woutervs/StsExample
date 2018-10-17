@@ -4,8 +4,9 @@ using System.Runtime.Caching;
 
 namespace StsExample.Helpers
 {
-    public class TypedMemoryCache<T> : MemoryCache where T : class
+    public class TypedMemoryCache<T> where T : class
     {
+        private readonly MemoryCache cache;
         private object WriteLock { get; } = new object();
 
         private readonly CacheItemPolicy defaultCacheItemPolicy = new CacheItemPolicy
@@ -13,8 +14,9 @@ namespace StsExample.Helpers
             SlidingExpiration = new TimeSpan(0, 15, 0)
         };
         
-        public TypedMemoryCache(string name, NameValueCollection nvc = null, CacheItemPolicy policy = null) : base(name, nvc)
+        public TypedMemoryCache(string name, NameValueCollection nvc = null, CacheItemPolicy policy = null)
         {
+            cache = new MemoryCache(name, nvc, true);
             if (policy != null) defaultCacheItemPolicy = policy;
         }
 
@@ -29,7 +31,7 @@ namespace StsExample.Helpers
                     return true;
 
                 returnData = getData();
-                Set(cacheKey, returnData, policy ?? defaultCacheItemPolicy);
+                cache.Set(cacheKey, returnData, policy ?? defaultCacheItemPolicy);
             }
 
             return false;
@@ -37,7 +39,7 @@ namespace StsExample.Helpers
 
         public bool TryGet(string cacheKey, out T returnItem)
         {
-            returnItem = (T)this[cacheKey];
+            returnItem = (T)cache[cacheKey];
             return returnItem != null;
         }
     }
