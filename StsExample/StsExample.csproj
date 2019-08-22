@@ -134,6 +134,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\EmailNotVerified\EmailNotVerifiedModel.cs" />
+    <Compile Include="Helpers\LoggingMiddleware.cs" />
     <Compile Include="Helpers\TransformXsltHelper.cs" />
     <Compile Include="Helpers\TypedMemoryCache.cs" />
     <Compile Include="Migrations\201809201528592_InitialCreate.cs" />
