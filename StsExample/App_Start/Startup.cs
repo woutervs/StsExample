@@ -70,7 +70,7 @@ namespace StsExample
             app.UseDiscordAuthentication(new DiscordAuthenticationOptions
             {
                 ClientId = "493794776144150528",
-                ClientSecret = "k_b5S2Id6lHQdfPnEg2QPmwSh7CE3kCy",
+                ClientSecret = "k_b5S2Id6lHQdfPnEg2QPmwSh7CE3kCy", //No longer valid, TODO: replace with user secrets
                 Provider = new DiscordAuthorizationProvider(),
                 CallbackPath = new PathString("/api/external/discord/"),
                 SignInAsAuthenticationType = "None" //We don't want the default login behavior where a cookie is set.
